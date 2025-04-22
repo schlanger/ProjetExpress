@@ -36,7 +36,7 @@ jobs:
       - name: Run Ansible playbook on AWS EC2
 
         run: |
-          ansible-playbook -i "${{ secrets.AWS_HOST }}," ../ansible/deploy.yml \
+          ansible-playbook -i "${{ secrets.AWS_HOST }}," ./ansible/deploy.yml \
             --private-key .ssh/private_key \
             -u serveurweb \
             --ssh-extra-args "-o StrictHostKeyChecking=no"

@@ -1,2 +1,2 @@
 [aws]
-{{ SERVER_IP }} ansible_user=serveurweb
+{{ SERVER_IP }} ansible_user=admin

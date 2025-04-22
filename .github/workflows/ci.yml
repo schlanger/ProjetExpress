@@ -35,8 +35,8 @@ jobs:
 
         run: |
           ansible-playbook -i "${{ secrets.AWS_HOST }}," ../ansible/deploy.yml \
-      --private-key .ssh/private_key \
-      -u serveurweb \
-      --ssh-extra-args "-o StrictHostKeyChecking=no"
+            --private-key .ssh/private_key \
+            -u serveurweb \
+            --ssh-extra-args "-o StrictHostKeyChecking=no"
         working-directory: .github/workflows
 

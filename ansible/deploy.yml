@@ -8,11 +8,6 @@
     git_repo: https://github.com/schlanger/ProjetExpress.git
 
   tasks:
-    - name: S'assurer que Git est installé
-      apt:
-        name: git
-        state: present
-        update_cache: yes
 
     - name: Cloner le dépôt Git s'il n'existe pas déjà
       git:

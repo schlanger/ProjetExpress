@@ -18,7 +18,7 @@
         update: yes
 
     - name: Lancer Docker Compose
-      command: docker compose up -d
+      command: docker-compose up -d
       args:
         chdir: "{{ app_dir }}"
 

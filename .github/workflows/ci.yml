@@ -36,7 +36,7 @@ jobs:
       - name: Run Ansible playbook on AWS EC2
         working-directory: ${{ github.workspace }}
         run: |
-          ansible-playbook -i ./ansible/inventory ./ansible/playbook.yml \
+          ansible-playbook -i ./ansible/inventory ./ansible/deploy.yml \
             -u serveurweb \
             --ssh-extra-args "-o StrictHostKeyChecking=no"
 

@@ -34,11 +34,9 @@ jobs:
           sed -i "s|{{ SERVER_IP }}|${{ secrets.AWS_HOST }}|g" ./ansible/inventory
 
       - name: Run Ansible playbook on AWS EC2
-
+        working-directory: ${{ github.workspace }}
         run: |
-          ansible-playbook -i "${{ secrets.AWS_HOST }}," ./ansible/deploy.yml \
-            --private-key .ssh/private_key \
+          ansible-playbook -i ./ansible/inventory ./ansible/playbook.yml \
             -u serveurweb \
             --ssh-extra-args "-o StrictHostKeyChecking=no"
-        working-directory: .github/workflows
 

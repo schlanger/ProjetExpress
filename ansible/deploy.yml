@@ -1,7 +1,7 @@
 ---
 - name: Déployer projet Express avec Docker Compose
   hosts: all
-  become: true
+  become: false
 
   vars:
     app_dir: /home/yschlanger/ProjetExpress

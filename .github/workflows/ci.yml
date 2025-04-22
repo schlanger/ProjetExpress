@@ -16,19 +16,17 @@ jobs:
 
       - name: Install ansible 
         run: | 
-          sudo apt update
-          sudo apt upgrade -y
           sudo apt install ansible -y
 
       - name: Add SSH key
         uses: webfactory/ssh-agent@v0.8.0
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.AWS_SSH_KEY }}
 
       - name: Add server to known_hosts
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.AWS_HOST }} >> ~/.ssh/known_hosts
 
       - name: Replace SERVER_IP in Ansible inventory
 

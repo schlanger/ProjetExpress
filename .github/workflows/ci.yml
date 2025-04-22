@@ -1,0 +1,42 @@
+name: Deploy to AWS
+
+on:
+ push:
+   branch:
+
+     - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install ansible 
+        run: | 
+          sudo apt update
+          sudo apt upgrade -y
+          sudo apt install ansible -y
+
+      - name: Set up SSH key
+
+        run: |
+          echo "${{ secrets.AWS_SSH_KEY }}" > ~/.ssh/private_key
+          chmod 600 ~/.ssh/private_key
+
+      - name: Replace SERVER_IP in Ansible inventory
+
+        run: |
+          sed -i "s|{{ SERVER_IP }}|${{ secrets.AWS_HOST }}|g" ./ansible/inventory
+
+      - name: Run Ansible playbook on AWS EC2
+
+        run: |
+          ansible-playbook -i "${{ secrets.AWS_HOST }}," ../ansible/deploy.yml \
+      --private-key .ssh/private_key \
+      -u serveurweb \
+      --ssh-extra-args "-o StrictHostKeyChecking=no"
+        working-directory: .github/workflows
+

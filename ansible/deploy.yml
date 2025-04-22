@@ -1,0 +1,29 @@
+---
+- name: Déployer projet Express avec Docker Compose
+  hosts: all
+  become: true
+
+  vars:
+    app_dir: /home/yschlanger/ProjetExpress
+    git_repo: https://github.com/schlanger/ProjetExpress.git
+
+  tasks:
+    - name: S'assurer que Git est installé
+      apt:
+        name: git
+        state: present
+        update_cache: yes
+
+    - name: Cloner le dépôt Git s'il n'existe pas déjà
+      git:
+        repo: "{{ git_repo }}"
+        dest: "{{ app_dir }}"
+        version: main
+        force: no
+        update: yes
+
+    - name: Lancer Docker Compose
+      command: docker compose up -d
+      args:
+        chdir: "{{ app_dir }}"
+
